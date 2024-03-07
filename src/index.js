@@ -1,6 +1,7 @@
+const API = 'http://localhost:3000/foods'
 const restaurantMenu = document.getElementById('restaurant-menu')
 
-fetch('http://localhost:3000/foods')
+fetch(API)
 .then(response => response.json())
 .then(foods => {
     displayFoodDetails(foods[0])
@@ -46,5 +47,34 @@ newFoodForm.addEventListener('submit', (event) => {
 
     // write your code here
 
+    // lecture notes 
+//     - [ ] Understand how to send a `POST` request
+
+// - [ ] Explain the difference between optimistic and pessimistic rendering
+//when you refresh the page the new data added goes away - optimistic
+//when you refresh the page the new data persists - pessimistic rendering 
+
+    fetch(API, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(newFood)
+    })
+    .then(response => {
+        if(response.ok === true){
+            alert(" Success: New Food added Succesfully")
+        }
+        else{
+            alert("Error: Unable to add new Food")
+        }
+        
+    })
+
     newFoodForm.reset()
+
 })
+
+// example of a post request
+
+
+
+    
